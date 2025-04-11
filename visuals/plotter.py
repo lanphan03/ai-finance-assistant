@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 DATA_FILE = "data/expenses.csv"
 
+# Plot Spending by Category (BAR CHART)
 def plot_spending_by_category():
     try:
         df = pd.read_csv(DATA_FILE)
@@ -23,4 +24,30 @@ def plot_spending_by_category():
     plt.ylabel("Total Amount Spent ($)")
     plt.tight_layout()
     plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
+
+# Plot Spending Distribution (PIE CHART)
+def plot_spending_pie_chart():
+    try:
+        df = pd.read_csv(DATA_FILE)
+    except FileNotFoundError:
+        print("No data to plot.")
+        return
+
+    if df.empty:
+        print("No expenses recorded yet.")
+        return
+
+    category_totals = df.groupby("Category")["Amount"].sum()
+
+    plt.figure(figsize=(8, 8))
+    plt.pie(
+        category_totals,
+        labels=category_totals.index,
+        autopct="%1.1f%%",
+        startangle=140
+    )
+    plt.title("Spending Distribution by Category")
+    plt.axis('equal')
+    plt.tight_layout()
     plt.show()
