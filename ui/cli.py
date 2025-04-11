@@ -1,7 +1,16 @@
 from core import tracker
+from ml.categorizer import ExpenseCategorizer
+
+suggested = categorizer.predict(description)
+if suggested:
+    print(f"Suggested category: {suggested}")
 
 def main():
     tracker.initialize_file()
+    categorizer = ExpenseCategorizer()
+    
+    if not categorizer.load_model():
+        categorizer.train()
 
     while True:
         print("\n==== AI Finance Assistant ====")
@@ -12,12 +21,32 @@ def main():
         choice = input("Choose an option (1-3): ").strip()
 
         if choice == '1':
-            tracker.add_expense()
+            # Get user input for description
+            date = input("Enter date (YYYY-MM-DD): ").strip()
+            date = date if date else None
+
+            description = input("Enter description: ").strip()
+
+            # Predict category
+            suggested = categorizer.predict(description)
+            if suggested:
+                print(f"Suggested category: {suggested}")
+
+            category = input("Enter category: ").strip()
+            category = suggested if category == "" and suggested else category
+
+            amount = float(input("Enter amount: ").strip())
+
+            # Add the expense
+            tracker.add_expense(date=date, category=category, amount=amount, description=description)
+            
         elif choice == '2':
             tracker.view_expenses()
+            
         elif choice == '3':
             print("See you later!")
             break
+            
         else:
             print("Invalid option. Please try again.")
 
