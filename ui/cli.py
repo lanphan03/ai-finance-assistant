@@ -17,8 +17,8 @@ def main():
         print("2. View All Expenses")
         print("3. Retrain Category Model")
         print("4. Show Summary")
-        print("5. Exit")
-
+        print("5. Plot Spending by Category")
+        print("6. Exit")
 
         choice = input("Choose an option (1-3): ").strip()
 
@@ -53,8 +53,12 @@ def main():
         elif choice == '4':
             from core import stats
             stats.show_summary()
-            
+
         elif choice == '5':
+            from visuals import plotter
+            plotter.plot_spending_by_category()
+            
+        elif choice == '6':
             print("See you later!")
             break
         
