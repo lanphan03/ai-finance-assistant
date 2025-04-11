@@ -16,7 +16,8 @@ def main():
         print("\n==== AI Finance Assistant ====")
         print("1. Add Expense")
         print("2. View All Expenses")
-        print("3. Exit")
+        print("3. Retrain Category Model")
+        print("4. Exit")
 
         choice = input("Choose an option (1-3): ").strip()
 
@@ -44,9 +45,13 @@ def main():
             tracker.view_expenses()
             
         elif choice == '3':
+            print("Retraining the model on updated data...")
+            categorizer.train()
+            
+        elif choice == '4':
             print("See you later!")
             break
-            
+        
         else:
             print("Invalid option. Please try again.")
 
