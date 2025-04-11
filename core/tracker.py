@@ -39,6 +39,19 @@ def add_expense(date=None, category=None, amount=None, description=None):
 
     print("Expense successfully added.")
 
+def view_expenses():
+    initialize_file()
+    with open(DATA_FILE, mode='r') as file:
+        reader = csv.DictReader(file)
+        expenses = list(reader)
+
+    if not expenses:
+        print("No expenses recorded yet.")
+        return
+
+    print("\n--- Expense History ---")
+    for row in expenses:
+        print(f"{row['Date']} | {row['Category']} | ${row['Amount']} | {row['Description']}")
 
 # Run this file directly to add an expense
 if __name__ == "__main__":
