@@ -16,7 +16,7 @@ def main():
         print("5. Plot Spending by Category")
         print("6. Exit")
 
-        choice = input("Choose an option (1-3): ").strip()
+        choice = input("Choose an option (1-6): ").strip()
 
         if choice == '1':
             # Get user input for description
