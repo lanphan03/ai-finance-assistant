@@ -47,6 +47,7 @@ def main():
         elif choice == '3':
             print("Retraining the model on updated data...")
             categorizer.train()
+            print("Model updated.")
             
         elif choice == '4':
             print("See you later!")
