@@ -16,7 +16,7 @@ def main():
         elif choice == '2':
             tracker.view_expenses()
         elif choice == '3':
-            print("Goodbye!")
+            print("See you later!")
             break
         else:
             print("Invalid option. Please try again.")
