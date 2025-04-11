@@ -1,10 +1,6 @@
 from core import tracker
 from ml.categorizer import ExpenseCategorizer
 
-suggested = categorizer.predict(description)
-if suggested:
-    print(f"Suggested category: {suggested}")
-
 def main():
     tracker.initialize_file()
     categorizer = ExpenseCategorizer()
