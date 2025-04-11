@@ -13,10 +13,12 @@ def main():
         categorizer.train()
 
     while True:
-        print("\n==== AI Finance Assistant ====")
         print("1. Add Expense")
         print("2. View All Expenses")
-        print("3. Exit")
+        print("3. Retrain Category Model")
+        print("4. Show Summary")
+        print("5. Plot Spending by Category")
+        print("6. Exit")
 
         choice = input("Choose an option (1-3): ").strip()
 
@@ -44,9 +46,22 @@ def main():
             tracker.view_expenses()
             
         elif choice == '3':
+            print("Retraining the model on updated data...")
+            categorizer.train()
+            print("Model updated.")
+
+        elif choice == '4':
+            from core import stats
+            stats.show_summary()
+
+        elif choice == '5':
+            from visuals import plotter
+            plotter.plot_spending_by_category()
+            
+        elif choice == '6':
             print("See you later!")
             break
-            
+        
         else:
             print("Invalid option. Please try again.")
 
