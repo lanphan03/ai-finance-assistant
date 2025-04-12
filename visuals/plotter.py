@@ -51,3 +51,32 @@ def plot_spending_pie_chart():
     plt.axis('equal')
     plt.tight_layout()
     plt.show()
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from core.tracker import DATA_FILE
+
+def plot_spending_over_time():
+    try:
+        df = pd.read_csv(DATA_FILE, parse_dates=["Date"])
+    except FileNotFoundError:
+        print("No data to plot.")
+        return
+
+    if df.empty:
+        print("No expenses recorded.")
+        return
+
+    df["Date"] = pd.to_datetime(df["Date"])
+    df.sort_values("Date", inplace=True)
+    daily_totals = df.groupby("Date")["Amount"].sum()
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(daily_totals.index, daily_totals.values, marker="o", linestyle="-", color="blue")
+    plt.title("Spending Over Time")
+    plt.xlabel("Date")
+    plt.ylabel("Total Amount Spent")
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
