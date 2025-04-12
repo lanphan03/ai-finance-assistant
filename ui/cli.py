@@ -14,11 +14,11 @@ def main():
         print("3. Retrain Category Model")
         print("4. Show Summary")
         print("5. Plot Spending by Category")
-        print("5. Plot Spending by Category (Bar)")
-        print("6. Plot Spending Distribution (Pie)")
-        print("7. Exit")
+        print("6. Plot Spending Distribution")
+        print("7. Plot Spending Over Time")
+        print("8. Exit")
 
-        choice = input("Choose an option (1-7): ").strip()
+        choice = input("Choose an option (1-8): ").strip()
 
         if choice == '1':
             # Get user input for description
@@ -59,8 +59,12 @@ def main():
         elif choice == '6':
             from visuals import plotter
             plotter.plot_spending_pie_chart()
-            
+
         elif choice == '7':
+            from visuals import plotter
+            plotter.plot_spending_over_time()
+            
+        elif choice == '8':
             print("See you later!")
             break
         
