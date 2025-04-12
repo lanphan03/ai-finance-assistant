@@ -53,6 +53,26 @@ def view_expenses():
     for row in expenses:
         print(f"{row['Date']} | {row['Category']} | ${row['Amount']} | {row['Description']}")
 
+def filter_expenses_by_category():
+    try:
+        df = pd.read_csv(DATA_FILE)
+    except FileNotFoundError:
+        print("No expense data found.")
+        return
+
+    if df.empty:
+        print("No expenses recorded.")
+        return
+
+    category = input("Enter category to filter by: ").strip()
+    filtered_df = df[df["Category"].str.lower() == category.lower()]
+
+    if filtered_df.empty:
+        print(f"No expenses found for category '{category}'.")
+    else:
+        print(f"Expenses for category '{category}':")
+        print(filtered_df.to_string(index=False))
+
 # Run this file directly to add an expense
 if __name__ == "__main__":
     initialize_file()
